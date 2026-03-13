@@ -68,9 +68,13 @@ for key, df in dfs.items():
 
 measures_dict = {}
 
-measures_dict['Header by Ethnicity'] = group_calculation(dfs['header'], 'ETHNICITY', 'Header - Ethnicities')
+measures_dict["Header by Ethnicity"] = group_calculation(
+    dfs["header"], "ETHNICITY", "Header - Ethnicities"
+)
 
-measures_dict['Header by Age'] = group_calculation(dfs['header'], 'AGE_BUCKETS', 'Header - Age')
+measures_dict["Header by Age"] = group_calculation(
+    dfs["header"], "AGE_BUCKETS", "Header - Age"
+)
 
 
 output_table = pd.concat(list(measures_dict.values()))
@@ -80,6 +84,10 @@ output_table = pd.concat(list(measures_dict.values()))
 #     lambda row: relativedelta(row['MIS_START_dt'], row['MIS_END_dt']), axis=1
 # )
 
-dfs['missing']['MISSING_DURATION'] = dfs['missing']['MISSING_DURATION'] = time_difference(dfs['missing']['MIS_START_dt'], dfs['missing']['MIS_END_dt'], business_days = True)
+dfs["missing"]["MISSING_DURATION"] = dfs["missing"]["MISSING_DURATION"] = (
+    time_difference(
+        dfs["missing"]["MIS_START_dt"], dfs["missing"]["MIS_END_dt"], business_days=True
+    )
+)
 
-print(dfs['missing'])
+print(dfs["missing"])

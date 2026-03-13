@@ -74,23 +74,26 @@ def clean_903_table(df: pd.DataFrame, collection_end: pd.Timestamp):
 
 ########### END OF SESSION 2 ###################
 
+
 def group_calculation(df, column, measure_name):
     grouped = df.groupby([column]).size()
-    grouped = grouped.to_frame('Count').reset_index()
+    grouped = grouped.to_frame("Count").reset_index()
 
-    grouped['Percentage'] =  (grouped['Count'] / grouped['Count'].sum() ) * 100
+    grouped["Percentage"] = (grouped["Count"] / grouped["Count"].sum()) * 100
 
-    grouped = grouped.rename(columns={column:'Value'})
+    grouped = grouped.rename(columns={column: "Value"})
 
-    grouped['Measure'] = measure_name
-    grouped_ordered = grouped[['Measure', 'Value', 'Count', 'Percentage']]
+    grouped["Measure"] = measure_name
+    grouped_ordered = grouped[["Measure", "Value", "Count", "Percentage"]]
 
     return grouped_ordered
 
+
 def time_difference(start, end, business_days=False):
     if business_days:
-        time_diff = np.busday_count(start.values.astype('datetime64[D]'), 
-                                    end.values.astype('datetime64[D]'))
+        time_diff = np.busday_count(
+            start.values.astype("datetime64[D]"), end.values.astype("datetime64[D]")
+        )
     else:
         time_diff = end - start
         time_diff = time_diff / pd.Timedelta(days=1)
